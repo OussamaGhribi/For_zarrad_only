@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import AuthLayout from "./components/auth/layout";
 import AuthRegister from "./pages/auth/register";
 import AuthLogin from "./pages/auth/login";
+import AdminDashboard from "./pages/admin-view/dashboard";
 import AdminLayout from "./components/admin-view/layout";
 import AdminFeatures from "./pages/admin-view/features";
 import AdminOrders from "./pages/admin-view/orders";
@@ -13,14 +14,15 @@ import ShoppingHome from "./pages/shopping-view/home";
 import ShoppingCheckout from "./pages/shopping-view/checkout";
 import ShoppingAccount from "./pages/shopping-view/account";
 import CheckAuth from "./components/common/check-auth";
+import UnauthPage from "./pages/unauth-page";
 
 
 function App() {
-  const isAuthenticated=False;
+  const isAuthenticated=false;
   const user=null
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      <h1>header Component</h1>
+      
       <Routes>
         <Route path="/auth" element={
           <CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -40,14 +42,17 @@ function App() {
             <Route path="orders" element={<AdminOrders/>}/>
             <Route path="features" element={<AdminFeatures/>}/>
         </Route>
-        <Route path="/shop" element={<ShoppingLayout/>}>
-
-        <Route path="home" element={<ShoppingHome/>} />
-        <Route path="listing" element={<ShoppingListing/>} />
-        <Route path="checkout" element={<ShoppingCheckout/>}/>
-        <Route path="account" element={<ShoppingAccount/>}/>
+        <Route path="/shop" element={
+          <CheckAuth user={user} isAuthenticated={isAuthenticated}>
+            <ShoppingLayout/>
+          </CheckAuth>} > 
+          <Route path="home" element={<ShoppingHome/>} />
+          <Route path="listing" element={<ShoppingListing/>} />
+          <Route path="checkout" element={<ShoppingCheckout/>}/>
+          <Route path="account" element={<ShoppingAccount/>}/>
         </Route>
         <Route path="*" element={<NotFound/>}/>
+        <Route path="/unauth-page" element={<UnauthPage/>}/>
       </Routes>
     </div>
   );

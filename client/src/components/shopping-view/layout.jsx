@@ -1,12 +1,12 @@
 import ShoppingHeader from "./header";
-
+import { Outlet } from "react-router-dom";
 function ShoppingLayout(){
     return(
         <div className="flex flex-col bg-white overflow-hidden">
             {/*common hearder*/}
             <ShoppingHeader/>
             <main className="flex flex-col w-full">
-                <outlet/>
+                <Outlet/>
             </main>
         </div>
     );
