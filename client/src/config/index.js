@@ -1,3 +1,4 @@
+
 export const registerFormControls = [
     {
         name: "userName",
@@ -99,3 +100,4 @@ export const addProductFormElements = [
       placeholder: "Enter total stock",
     },
   ];
+
