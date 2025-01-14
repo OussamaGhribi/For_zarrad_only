@@ -6,9 +6,9 @@ import{
     SheetHeader,
     SheetTitle,
 }from "@/components/ui/sheet";
-import { addProductFormElements } from "@/config";
-import { Fragment,useState } from "react";
+
 import { Description } from "@radix-ui/react-toast";
+import ProductImageUpload from "@/components/admin-view/image-upload";
 
 const initialFormData={
     image: null,
@@ -26,8 +26,10 @@ const initialFormData={
 function AdminProducts() {
     const [openCreateProductsDialog,setOpenCreateProductsdialog]=useState(false);
     const [formData,setFormData]=useState(initialFormData)
+    const [imageFile,setImageFile]=useState(null);
+    const [uploadedImageUrl,setUploadedImageUrl]=useState("");
 
-    function on
+    function onSubmit(){}
 
     return <Fragment>
         <div className="mb-5 w-full flex justify-end">
@@ -44,8 +46,10 @@ function AdminProducts() {
                 Add New Product
             </SheetTitle>
         </SheetHeader>
+        <ProductImageUpload file={imageFile} setFile={setImageFile} uploadedImageUrl={uploadedImageUrl} setUploadedImageUrl={setUploadedImageUrl}/>
         <div className="py-6">
             <CommonForm
+            onSubmit={onSubmit}
                 formData={formData}
                 setFormData={setFormData}
                 buttonText='Add'
