@@ -29,8 +29,7 @@ function HeaderRightContent(){
         dispatch(loginUser());
     }
 
-
-    return <div className="flex lg:items-center lg:flex-row flex-col gap">
+    return (<div className="flex lg:items-center lg:flex-row flex-col gap">
         <Button>
             <ShoppingCart className="w-6 h-6" />
             <span className="sr-only">User Cart</span>
@@ -57,12 +56,12 @@ function HeaderRightContent(){
                     </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>
-    </div>
+    </div>);
 }
 
 function ShoppingHeader(){
 
-    //const {isAuthenticated } = useSelector(state => state.auth);
+    const {isAuthenticated } = useSelector(state => state.auth);
     
     return (
         <header className="sticky top-0 z-0 w-full border-b bg-background">

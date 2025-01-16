@@ -3,7 +3,6 @@ header {
     top: 0; /* Ensure it sticks to the top */
     z-index: -1;
     display: flex;
-    bottom: 50px;
     justify-content: space-between;
     align-items: center;
     width: 100%;
