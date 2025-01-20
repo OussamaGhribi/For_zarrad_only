@@ -1,14 +1,12 @@
 header {
     position: sticky; /* or fixed if you want it to stay at the top on scroll */
     top: 0; /* Ensure it sticks to the top */
-    z-index: -1;
+    z-index: 2;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
     gap :410px;
-    padding: 0 16px; /* Add some padding for spacing */
-    background-color: white; /* Optional: Ensure a background for clarity */
+    background-color: rgb(199, 199, 199); /* Optional: Ensure a background for clarity */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for design */
 }
 

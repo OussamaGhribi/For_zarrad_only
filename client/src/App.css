@@ -27,6 +27,28 @@
   }
 }
 
+input[type="checkbox"] {
+  appearance: none; /* Remove default styling */
+  background-color: var(--background, #ffffff); /* Light background color */
+  border: 2px solid var(--border, #888); /* Border color */
+  width: 1rem; /* Width of the checkbox */
+  height: 1rem; /* Height of the checkbox */
+  border-radius: 4px; /* Optional for rounded checkboxes */
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--primary, #646cff); /* Checked background color */
+  border-color: var(--primary, #646cff); /* Optional for consistency */
+}
+
+input[type="checkbox"]:focus {
+  outline: 2px solid var(--ring, #61dafb); /* Add a focus outline */
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -40,3 +62,4 @@
 .read-the-docs {
   color: #888;
 }
+  
