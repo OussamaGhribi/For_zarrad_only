@@ -7,13 +7,13 @@ const authRouter = require("./routes/auth/auth-routes");
 const adminProductsRouter = require("./routes/admin/products-routes");
 const shopProductRouter = require("./routes/shop/products-routes")
 const shopCartRouter = require("./routes/shop/cart-routes")
+const shopAdressRouter = require("./routes/shop/address-routes")
 
 dotenv.config();
 
 mongoose
   .connect(
-    process.env.MONGO_URI ||
-      "mongodb+srv://user-commerce:ecommerce@cluster0.7zipw.mongodb.net/"
+    process.env.MONGO_URI 
   )
   .then(() => console.log("MongoDB connected!"))
   .catch((error) => console.log("error connecting to db !"));
@@ -42,5 +42,6 @@ app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter );
 app.use("/api/shop/products",shopProductRouter);
 app.use("/api/shop/cart",shopCartRouter)
+app.use("/api/shop/address",shopAdressRouter)
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));
