@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
 import { Skeleton } from "@/components/ui/skeleton"
+import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 
 
 function App() {
@@ -32,7 +33,6 @@ function App() {
 
   return (
     <div className="flex flex-col overflow-hidden bg-white">
-      
       <Routes>
         <Route path="/auth" element={
           <CheckAuth isAuthenticated={isAuthenticated} user={user}>
@@ -60,6 +60,7 @@ function App() {
           <Route path="listing" element={<ShoppingListing/>} />
           <Route path="checkout" element={<ShoppingCheckout/>}/>
           <Route path="account" element={<ShoppingAccount/>}/>
+          <Route path="paypal-return" element={<PaypalReturnPage/>} />
         </Route>
         <Route path="*" element={<NotFound/>}/>
         <Route path="/unauth-page" element={<UnauthPage/>}/>
