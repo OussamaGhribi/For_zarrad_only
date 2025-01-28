@@ -20,6 +20,11 @@ const OrderSchema = new mongoose.Schema({
     phone: String,
     notes: String,
   },
+  orderStatus: {
+    type: String,
+    enum: ["pending", "complete"],  // This ensures the status is either pending or complete
+    default: "pending",
+  },
   orderStatus: String,
   paymentMethod: String,
   paymentStatus: String,

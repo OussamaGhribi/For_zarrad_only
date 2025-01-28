@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
 };
 
+
 export const addToCart = createAsyncThunk(
   "cart/addToCart",
   async ({ userId, productId, quantity }) => {

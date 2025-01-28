@@ -1,0 +1,70 @@
+/* Set up the main container to center everything */
+.success-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #34d399, #3b82f6); /* Green to Blue Gradient */
+    padding: 0 20px;
+  }
+  
+  /* Content box */
+  .success-content {
+    text-align: center;
+    background-color: white;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  /* Title */
+  .success-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #34d399;
+    margin-bottom: 20px;
+  }
+  
+  /* Message below the title */
+  .success-message {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 30px;
+  }
+  
+  /* Checkmark icon */
+  .checkmark-container {
+    margin-bottom: 30px;
+  }
+  
+  .checkmark-icon {
+    width: 80px;
+    height: 80px;
+    color: #34d399;
+  }
+  
+  /* Additional message */
+  .email-message {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 30px;
+  }
+  
+  /* Button */
+  .homepage-btn {
+    background-color: #34d399;
+    color: white;
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .homepage-btn:hover {
+    background-color: #059669;
+    transition: 0.3s;color: white;
+  }
+  

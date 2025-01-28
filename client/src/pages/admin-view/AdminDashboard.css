@@ -1,0 +1,95 @@
+/* General Layout */
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #333;
+}
+
+.dashboard-container {
+  padding: 20px;
+  
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  color: #4a90e2;
+}
+
+/* Grid Layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Earnings Card */
+.earnings-card {
+  background: linear-gradient(135deg, #4a90e2, #007aff);
+  color: white;
+}
+
+.earnings-card h2 {
+  color: white;
+}
+
+.earnings-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.loading span {
+  color: #666;
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+/* Chart Cards */
+.chart-card {
+  padding: 20px;
+}
+
+.chart-card canvas {
+  max-height: 300px;
+}

@@ -1,21 +1,17 @@
 import Address from "@/components/shopping-view/address";
 import accImg from "../../assets/account.jpg";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import UserCartItemsContent from "@/components/shopping-view/cart-items-content";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { createNewOrder } from "@/store/order-slice";
-import { toast, ToastContainer } from "react-toastify";  // Add ToastContainer import
-import "react-toastify/dist/ReactToastify.css";  // Ensure this import is present for styles
+import { toast, ToastContainer } from "react-toastify";  
+import "react-toastify/dist/ReactToastify.css"; 
+import axios from "axios";
 
 function ShoppingCheckout() {
-  const { user } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.shopCart);
-  const { approvalURL } = useSelector((state) => state.shopOrder);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
-  const [isPaymentStart, setIsPaymentStart] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
-  const dispatch = useDispatch();
 
   const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
@@ -30,49 +26,28 @@ function ShoppingCheckout() {
         )
       : 0;
 
-  const handleInitiatePaypalPayment = () => {
-    const orderData = {
-      userId: user?.id,
-      cartItems: cartItems.items.map((singleCartItem) => ({
-        productId: singleCartItem?.productId,
-        title: singleCartItem?.title,
-        image: singleCartItem?.image,
-        price:
-          singleCartItem?.salePrice > 0
-            ? singleCartItem?.salePrice
-            : singleCartItem?.price,
-        quantity: singleCartItem?.quantity,
-      })),
-      addressInfo: {
-        addressId: currentSelectedAddress?._id,
-        address: currentSelectedAddress?.address,
-        city: currentSelectedAddress?.city,
-        pincode: currentSelectedAddress?.pincode,
-        phone: currentSelectedAddress?.phone,
-        notes: currentSelectedAddress?.notes,
-      },
-      orderStatus: "pending",
-      paymentMethod: "paypal",
-      paymentStatus: "pending",
-      totalAmount: totalCartAmount,
-      orderDate: new Date(),
-      orderUpdateDate: new Date(),
-      paymentId: "",
-      payerId: "",
-    };
 
-    dispatch(createNewOrder(orderData)).then((data) => {
-      if (data?.payload?.success) {
-        setIsPaymentStart(true);
-      } else {
-        setIsPaymentStart(false);
-      }
-    });
-  };
-
-  if (approvalURL) {
-    window.location.href = approvalURL;
-  }
+      const onsubmit = (e) => {
+        e.preventDefault();
+        axios
+          .post("http://localhost:5000/api/add", { amount: totalCartAmount * 1000 })
+          .then((res) => {
+            const { payment_id, result } = res.data;
+            if (result && result.link) {
+              localStorage.setItem('payment_id', payment_id);
+              window.location.href = result.link;
+            } else {
+              console.error("Payment response does not contain a valid link");
+              toast.error("Failed to initiate payment");
+            }
+          })
+          .catch((err) => {
+            console.log("Error initiating payment:", err);
+            toast.error("Error initiating payment");
+          });
+      };      
+      
+  
 
   const goToNextStep = () => {
     if (currentStep === 2 && !currentSelectedAddress) {
@@ -154,19 +129,19 @@ function ShoppingCheckout() {
               </div>
             </div>
             <div className="mt-4 w-full">
-              <Button
-                onClick={handleInitiatePaypalPayment}
-                className="w-full"
-                disabled={!currentSelectedAddress}
-              >
-                Checkout with Paypal
-              </Button>
+
+              <form onSubmit={onsubmit}>
+                <Button
+                  className="w-full"
+                  disabled={!currentSelectedAddress}
+                >
+                  Checkout with Flouci
+                </Button>
+              </form>
             </div>
           </div>
         )}
       </div>
-
-      {/* Toast container */}
       <ToastContainer />
     </div>
   );
