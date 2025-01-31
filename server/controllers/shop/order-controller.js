@@ -15,6 +15,7 @@ const createOrder = async (req, res) => {
       orderUpdateDate,
       paymentId,
       payerId,
+      cartId,
     } = req.body;
 
     const create_payment_json = {

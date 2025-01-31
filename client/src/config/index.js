@@ -144,6 +144,8 @@ export const shoppingViewHeaderMenuItems = [
   },
 ];
 
+
+
 export const filterOptions = {
   category: [
     { id: "men", label: "Men" },
@@ -160,6 +162,10 @@ export const filterOptions = {
     { id: "zara", label: "Zara" },
     { id: "h&m", label: "H&M" },
   ],
+  sales: [
+    { id: "onSale", label: "On Sale" },
+  ],
+  
 };
 
 export const sortOptions = [

@@ -23,6 +23,7 @@ import PaypalReturnPage from "./pages/shopping-view/paypal-return";
 import SuccessPage from "./pages/shopping-view/success";
 import FailPage from "./pages/shopping-view/fail";
 import LandingPage from "./pages/landingPage";
+import Search from "./pages/shopping-view/search";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useSelector((state) => state.auth);
@@ -76,6 +77,7 @@ function App() {
           <Route path="checkout" element={<ShoppingCheckout />} />
           <Route path="account" element={<ShoppingAccount />} />
           <Route path="paypal-return" element={<PaypalReturnPage />} />
+          <Route path="search" element={<Search />} />
         </Route>
 
         {/* Only allow authenticated users to access these pages */}
@@ -95,10 +97,11 @@ function App() {
             </CheckAuth>
           }
         />
-
+        
         <Route path="/" element={<LandingPage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/unauth-page" element={<UnauthPage />} />
+        
       </Routes>
     </div>
   );

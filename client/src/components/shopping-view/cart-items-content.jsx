@@ -33,7 +33,7 @@ function UserCartItemsContent({cartItem}) {
     }
 
     return ( 
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-4 ">
             <img src={cartItem?.image} alt={cartItem?.title} className="w-20 h-20 rounded object-cover" />
             <div className="flex-1">
                 <h3 className="font-extrabold">{cartItem?.title} </h3>

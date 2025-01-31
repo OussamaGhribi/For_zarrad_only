@@ -42,6 +42,7 @@ function MenuItems(){
     }
 
     return (<nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
+        
         {
             shoppingViewHeaderMenuItems.map(menuItem => <Label onClick={()=>handleNavigate(menuItem)} className="text-sm font-medium cursor-pointer" key={menuItem.id} >{menuItem.label}</Label>)
         }
@@ -70,8 +71,9 @@ function HeaderRightContent(){
 
     return (<div className="flex lg:items-center lg:flex-row flex-col gap-3 m-3 w-full">
             <Sheet open={openCartSheet} onOpenChange={()=>setOpenCartSheet(false)}>
-                <Button onClick={()=>setOpenCartSheet(true)} variant="outline" size="icon" className="">
+                <Button onClick={()=>setOpenCartSheet(true)} variant="outline" size="icon" className="relative">
                     <ShoppingCart className="w-6 h-6" />
+                    <span className="absolute top-[-8px] right-[-5px] font-bold text-sm p-2">{cartItems?.items?.length || 0}</span>
                     <span className="sr-only">User Cart</span>  
                 </Button>
                 <UserCartWrapper 

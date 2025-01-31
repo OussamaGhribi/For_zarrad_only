@@ -1,7 +1,18 @@
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "@/store/shop/cart-slice";
+import { useEffect } from "react";
 
 const SuccessPage = () => {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user) {
+      dispatch(clearCart(user.id)); 
+    }
+  }, [dispatch, user]);
   return (
-    <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-r from-green-400 to-blue-500 w-[120rem]">
+    <div className="flex items-center justify-center w-full min-h-screen bg-gradient-to-r from-green-400 to-blue-500 w-[121rem]">
       <div className="text-center p-10 bg-white rounded-lg shadow-lg max-w-lg mx-auto">
         <h1 className="text-4xl font-bold text-green-600 mb-6">Payment Successful!</h1>
         <p className="text-lg text-gray-600 mb-8">Thank you for your purchase! Your order has been successfully processed.</p>

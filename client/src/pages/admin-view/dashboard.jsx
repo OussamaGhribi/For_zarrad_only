@@ -114,7 +114,7 @@ function AdminDashboard() {
 
           <div className="card chart-card m-3">
             <h2>Sales Distribution</h2>
-            <Pie data={pieChartData} />
+            <Pie data={pieChartData}/>
           </div>
         </div>
     </div>

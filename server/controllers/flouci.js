@@ -1,5 +1,6 @@
 const axios = require("axios");
-const dotenv = require("dotenv")
+const dotenv = require("dotenv");
+const Order = require("../models/Order");
 
 let totalEarnings = 0; 
 dotenv.config();
@@ -22,6 +23,7 @@ module.exports = {
     try {
       const result = await axios.post(url, payload);
       totalEarnings += req.body.amount;
+
 
       res.send({
         ...result.data,

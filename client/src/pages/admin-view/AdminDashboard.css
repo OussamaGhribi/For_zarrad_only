@@ -36,7 +36,10 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 20px;
   text-align: center;
+  font-weight: bold;
+  color: black;
   transition: transform 0.2s, box-shadow 0.2s;
+  background-color:rgb(233, 233, 233);
 }
 
 .card:hover {

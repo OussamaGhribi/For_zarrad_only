@@ -10,6 +10,7 @@ const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAdressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopFlouciRouter = require("./routes/flouci-routes");
+const searchRoutes = require("./routes/shop/search-routes");
 
 
 
@@ -44,11 +45,15 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/admin/products", adminProductsRouter );
+
 app.use("/api/shop/products",shopProductRouter);
+
 app.use("/api/shop/cart",shopCartRouter);
 app.use("/api/shop/address",shopAdressRouter);
 app.use("/api/shop/order" , shopOrderRouter);
 app.use("/api", shopFlouciRouter);
+app.use("/api/search", searchRoutes);
+
 
 
 app.listen(PORT, () => console.log(`App running on port ${PORT}`));

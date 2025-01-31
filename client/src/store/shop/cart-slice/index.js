@@ -6,6 +6,17 @@ const initialState = {
   isLoading: false,
 };
 
+export const clearCart = createAsyncThunk(
+  "cart/clearCart",
+  async (userId) => {
+    const response = await axios.post(
+      `http://localhost:5000/api/shop/cart/clear/${userId}`
+    );
+    return response.data;
+  }
+);
+
+
 
 export const addToCart = createAsyncThunk(
   "cart/addToCart",

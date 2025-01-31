@@ -11,8 +11,8 @@ import ShoppingProductTile from "@/components/shopping-view/product-tile";
 import { createSearchParams, useSearchParams } from "react-router-dom";
 import ProductDetailsDialog from "@/components/shopping-view/product-details";
 import { addToCart, fetchCartItems } from "@/store/shop/cart-slice";
-import { useToast } from "@/hooks/use-toast";
 import { Separator } from "@/components/ui/separator";
+import { toast, ToastContainer } from "react-toastify";  
 
 function createSearchParamsHelper(filterParams) {
   const queryParams = [];
@@ -33,7 +33,6 @@ function ShoppingListing() {
   const [sort, setSort] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
-  const { toast } = useToast();
 
   // Pagination states
   const [currentPage, setCurrentPage] = useState(1);
@@ -72,9 +71,7 @@ function ShoppingListing() {
     dispatch(addToCart({ userId: user?.id, productId: getCurrentProductId, quantity: 1 })).then((data) => {
       if (data?.payload?.success) {
         dispatch(fetchCartItems(user?.id));
-        toast({
-          title: 'Product is added to cart!'
-        });
+        toast.success("product added to cart !");
       }
     });
   }
@@ -82,7 +79,18 @@ function ShoppingListing() {
   // Pagination calculations
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = productList.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Filtered product list logic
+  const filteredProductList = productList.filter(product => {
+    // Check for the "onSale" filter
+    if (filters.sales && filters.sales.includes("onSale")) {
+      return product.salePrice !== 0 && product.salePrice < product.price;
+    }
+    return true;
+  });
+
+  // Slice the filtered products to show the current page's products
+  const currentPosts = filteredProductList.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
     if (filters && Object.keys(filters).length > 0) {
@@ -113,7 +121,7 @@ function ShoppingListing() {
         <div className="p-4 border-b flex items-center justify-between">
           <h2 className="text-lg font-extrabold">All Products</h2>
           <div className="flex items-center gap-3">
-            <span className="text-muted-foreground">{productList.length} Products</span>
+            <span className="text-muted-foreground">{filteredProductList.length} Products</span>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm" className="flex items-center gap-1">
@@ -123,19 +131,17 @@ function ShoppingListing() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-[200px]">
                 <DropdownMenuRadioGroup value={sort} onValueChange={handleSort} className="cursor-pointer">
-                  {
-                    sortOptions.map(sortItem => (
-                      <DropdownMenuRadioItem value={sortItem.id} key={sortItem.id}>
-                        {sortItem.label}
-                      </DropdownMenuRadioItem>
-                    ))
-                  }
+                  {sortOptions.map(sortItem => (
+                    <DropdownMenuRadioItem value={sortItem.id} key={sortItem.id}>
+                      {sortItem.label}
+                    </DropdownMenuRadioItem>
+                  ))}
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pt-[20px]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 pt-[20px]">
           {
             currentPosts.length > 0 ?
               currentPosts.map(productItem => (
@@ -148,34 +154,31 @@ function ShoppingListing() {
               )) :
               <div>No products found</div>
           }
-          
         </div>
         {/* Pagination Controls */}
         <Separator className="m-5"/>
         <div className="flex justify-center items-center py-4 font-semibold">
-            <Button
+          <Button
             variant="outline"
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
-            >
+          >
             Previous
-            </Button>
-            <span className="mx-4">
-                {currentPage} .. {Math.ceil(productList.length / postsPerPage)}
-            </span>
-            <Button
+          </Button>
+          <span className="mx-4">
+            {currentPage} .. {Math.ceil(filteredProductList.length / postsPerPage)}
+          </span>
+          <Button
             variant="outline"
             onClick={() => setCurrentPage(prev => prev + 1)}
-            disabled={currentPage * postsPerPage >= productList.length}
-            >
+            disabled={currentPage * postsPerPage >= filteredProductList.length}
+          >
             Next
-            </Button>
+          </Button>
         </div>
       </div>
-
-      
-
       <ProductDetailsDialog open={openDetailsDialog} setOpen={setOpenDetailsDialog} productDetails={productDetails} />
+      <ToastContainer />
     </div>
   );
 }

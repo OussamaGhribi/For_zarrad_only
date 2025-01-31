@@ -1,0 +1,109 @@
+/* General layout styles */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    background: linear-gradient(135deg, #000000,#fafafa, #ff0000);
+    background-size: 400% 400%; /* Larger background size for smooth transition */
+    animation: gradientSmooth 15s ease infinite; /* Smooth gradient shift */
+}
+
+/* Content styles */
+.auth-content {
+    background-color: rgba(255, 255, 255, 0.85); /* Slight transparency for sleek look */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.auth-content:hover {
+    transform: translateY(-10px); /* Hover animation for the content box */
+}
+
+/* Header styles */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: textFadeIn 1s ease-in-out; /* Header animation */
+}
+
+.auth-header p {
+    font-size: 1rem;
+    color: #666;
+    animation: textFadeIn 1s ease-in-out 0.5s; /* Delayed animation */
+}
+
+
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.auth-form input {
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+    border-color: #000;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.auth-form button {
+    padding: 0.8rem;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #000; /* Black button */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-form button:hover {
+    background-color: #333; /* Darker shade when hovered */
+    transform: scale(1.05); /* Button hover animation */
+}
+
+/* Link styles */
+.auth-form .auth-link {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.auth-form .auth-link a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.auth-form .auth-link a:hover {
+    color: #2575fc; /* Color change on hover */
+}
