@@ -1,15 +1,16 @@
+import { useState } from "react";
 import Address from "@/components/shopping-view/address";
 import accImg from "../../assets/account.jpg";
 import { useSelector } from "react-redux";
 import UserCartItemsContent from "@/components/shopping-view/cart-items-content";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";  
 import "react-toastify/dist/ReactToastify.css"; 
 import axios from "axios";
 
 function ShoppingCheckout() {
   const { cartItems } = useSelector((state) => state.shopCart);
+  const { user } = useSelector((state) => state.auth);
   const [currentSelectedAddress, setCurrentSelectedAddress] = useState(null);
   const [currentStep, setCurrentStep] = useState(1);
   const [couponCode, setCouponCode] = useState("");
@@ -68,32 +69,42 @@ function ShoppingCheckout() {
     }
   };
 
-  const onsubmit = (e) => {
+  const onsubmit = async (e) => {
     e.preventDefault();
     const finalAmount = discountedTotal * 1000;
-    axios
-      .post("http://localhost:5000/api/add", { amount: finalAmount })
-      .then((res) => {
-        const { payment_id, result } = res.data;
-        if (result && result.link) {
-          // Successful payment, proceed with stock update
-          
-          decreaseProductStock(cartItems.items);
-          
-          localStorage.setItem("payment_id", payment_id);
-          window.location.href = result.link; // Redirect to payment gateway
-        } else {
-          console.error("Payment response does not contain a valid link");
-          toast.error("Failed to initiate payment");
-        }
-      })
-      .catch((err) => {
-        console.log("Error initiating payment:", err);
-        toast.error("Error initiating payment");
-      });
+  
+    try {
+      const res = await axios.post("http://localhost:5000/api/add", { amount: finalAmount });
+      const { payment_id, result } = res.data;
+  
+      if (result && result.link) {
+        await decreaseProductStock(cartItems.items);
+  
+        // Save the order in the backend
+        await axios.post("http://localhost:5000/api/shop/order/create", {
+          userId: user.id, 
+          cartId: cartItems.id, // Adding cartId to associate with the order
+          cartItems: cartItems.items,
+          totalAmount: discountedTotal,
+          paymentId: payment_id,
+          address: currentSelectedAddress,
+          orderStatus: "pending", // Corrected to match schema
+          paymentStatus: "pending", // Added paymentStatus as pending
+          orderDate: new Date(),
+          orderUpdateDate: new Date(),
+        });
+  
+        localStorage.setItem("payment_id", payment_id);
+        window.location.href = result.link; 
+      } else {
+        console.error("Payment response does not contain a valid link");
+        toast.error("Failed to initiate payment");
+      }
+    } catch (err) {
+      console.log("Error initiating payment:", err);
+      toast.error("Error initiating payment");
+    }
   };
-  
-  
 
   const goToNextStep = () => {
     if (currentStep === 2 && !currentSelectedAddress) {
@@ -178,7 +189,7 @@ function ShoppingCheckout() {
                   {discount > 0 ? (
                     <>
                       <del className="text-red-500">{totalCartAmount}$</del>{" "}
-                      {discountedTotal}$
+                      {discountedTotal}$ 
                     </>
                   ) : (
                     `${totalCartAmount}$`

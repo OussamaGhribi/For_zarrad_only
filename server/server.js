@@ -8,7 +8,7 @@ const adminProductsRouter = require("./routes/admin/products-routes");
 const shopProductRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAdressRouter = require("./routes/shop/address-routes");
-const shopOrderRouter = require("./routes/shop/order-routes");
+const shopOrderRouter = require("./routes/shop/orderRoutes");
 const shopFlouciRouter = require("./routes/flouci-routes");
 const searchRoutes = require("./routes/shop/search-routes");
 

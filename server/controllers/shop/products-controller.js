@@ -91,7 +91,6 @@ const updateProductStock = async (req, res) => {
       message: 'Product stock updated successfully',
       product,
     });
-    console.log("product updated !");
   } catch (error) {
     console.error('Error updating stock:', error);
     res.status(500).json({

@@ -30,7 +30,7 @@ function AdminOrderDetailsView() {
                     </div>
                     <div className="flex items-center justify-between">
                         <p className="font-medium">Order Price</p>
-                        <Label>$500</Label>
+                        <Label>TND 500</Label>
                     </div>
                     <div className="flex items-center justify-between">
                         <p className="font-medium">Order ID</p>
@@ -46,7 +46,7 @@ function AdminOrderDetailsView() {
                         <ul className="grid gap-3">
                             <li className="flex items-center justify-between">
                                 <span>Product one</span>
-                                <span>$100</span>
+                                <span>TND 100</span>
                             </li>
                         </ul>
                     </div>

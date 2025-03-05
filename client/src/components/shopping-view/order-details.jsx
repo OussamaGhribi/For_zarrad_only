@@ -13,7 +13,7 @@ function ShoppingOrderDetailsView() {
                 <div className="grid gap-2">
                     <div className="flex items-center justify-between">
                         <p className="font-medium">Order ID</p>
-                        <Label>123456</Label>
+                        <Label>123456789</Label>
                     </div>
                     <div className="flex items-center justify-between">
                         <p className="font-medium">Order Date</p>

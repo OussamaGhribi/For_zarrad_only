@@ -120,7 +120,7 @@ function ShoppingHome() {
                 </button>
                 {chatOpen && (
                     <div className="font-bold text-lg fixed bottom-20 mb-8 right-9 bg-white w-[400px] h-[550px] rounded-lg shadow-lg overflow-hidden">
-                        <iframe width="100%" height="100%" allow="microphone;" src="https://console.dialogflow.com/api-client/demo/embedded/26476fad-4fbb-414a-bffb-df1957509a2c"></iframe>
+                        <iframe height="430" width="350" src="https://bot.dialogflow.com/26476fad-4fbb-414a-bffb-df1957509a2c"></iframe>
                     </div>
                 )}
             </div>

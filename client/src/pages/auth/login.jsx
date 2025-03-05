@@ -32,21 +32,14 @@ function AuthLogin(){
     }
 
     return ( 
-        <div className="mx-auto w-full max-w-md space-y-6 ">
+        <div className="mx-auto w-full max-w-md space-y-6 m-3">
             
-            <div className="text-center">
+            <div className="text-center p-1">
                 
             <h1 className="text-3xl font-bold tracking-tight text-foreground">
                 Sign in your account
             </h1>
-            <p className="mt-2">
             
-                dont have an account
-                <Link className="font-bold ml-2 text-primary underline hover:underline"
-                to="/auth/register">
-                Register
-                </Link>
-            </p>
             </div>
             <CommonForm
         formControls={loginFormControls}
@@ -54,6 +47,14 @@ function AuthLogin(){
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}/>
+        <p className="p-1 m-1">
+            
+            dont have an account
+            <Link className="font-bold ml-2 text-primary underline hover:underline"
+            to="/auth/register">
+            Register
+            </Link>
+        </p>
         </div>
     )
 }

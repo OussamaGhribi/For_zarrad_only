@@ -44,13 +44,7 @@ function AuthRegister(){
             <h1 className="text-3xl font-bold tracking-tight text-foreground">
                 Create new account
             </h1>
-            <p className="mt-2">
-                Already have an account
-                <Link className="font-bold ml-2 text-primary underline hover:underline"
-                to="/auth/login">
-                Login
-                </Link>
-            </p>
+            
             </div>
             <CommonForm
         formControls={registerFormControls}
@@ -58,6 +52,13 @@ function AuthRegister(){
         formData={formData}
         setFormData={setFormData}
         onSubmit={onSubmit}/>
+        <p className="mt-2">
+                Already have an account
+                <Link className="font-bold ml-2 text-primary underline hover:underline"
+                to="/auth/login">
+                Login
+                </Link>
+            </p>
         </div>
     )
 }

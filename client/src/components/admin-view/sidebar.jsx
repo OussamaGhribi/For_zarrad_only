@@ -21,12 +21,12 @@ import {
       path: "/admin/products",
       icon: <ShoppingBasket />,
     },
-    {
+    /*{
       id: "orders",
       label: "Orders",
       path: "/admin/orders",
       icon: <BadgeCheck />,
-    },
+    },*/
   ];
   
   function MenuItems({ setOpen }) {
