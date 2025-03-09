@@ -2,14 +2,12 @@ import { Button } from '@/components/ui/button';
 import bannerOne from '../../assets/banner-1.jpg';
 import bannerTwo from '../../assets/banner-2.webp';
 import bannerThree from '../../assets/banner-3.webp';
-import { Airplay, BabyIcon, ChevronLeftIcon, ChevronRightIcon, CloudLightning, Heater, Images, Shirt, ShirtIcon, ShoppingBasket, UmbrellaIcon, WashingMachine, WatchIcon } from 'lucide-react';
-import { Card, CardContent } from '@/components/ui/card';
+import { ChevronLeftIcon, ChevronRightIcon, CloudLightning, WatchIcon, ShoppingBasket } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { fetchAllFilteredProducts, fetchProductDetails } from '@/store/shop/products-slice';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ShoppingProductTile from '@/components/shopping-view/product-tile';
-import { Link, useNavigate } from 'react-router-dom';
-import { addToCart, fetchCartItems } from '@/store/shop/cart-slice';
 import { ToastContainer, toast } from 'react-toastify';
 import ProductDetailsDialog from '@/components/shopping-view/product-details';
 
@@ -21,7 +19,6 @@ function ShoppingHome() {
     const { productList, productDetails } = useSelector(state => state.shopProducts);
     const { user } = useSelector(state => state.auth);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -37,6 +34,24 @@ function ShoppingHome() {
     useEffect(() => {
         if (productDetails !== null) setOpenDetailsDialog(true);
     }, [productDetails]);
+
+    useEffect(() => {
+        // Dynamically loading the chatbase script
+        const script = document.createElement('script');
+        script.src = "https://www.chatbase.co/embed.min.js";
+        script.id = "5LOC091v5h3JXNMzMwzsu";
+        script.domain = "www.chatbase.co";
+        document.body.appendChild(script);
+
+        script.onload = () => {
+            console.log('Chatbase script loaded successfully');
+        };
+
+        return () => {
+            // Cleanup the script on component unmount
+            document.body.removeChild(script);
+        };
+    }, []);
 
     function handleAddToCart(getCurrentProductId) {
         dispatch(addToCart({ userId: user?.id, productId: getCurrentProductId, quantity: 1 })).then((data) => {
@@ -112,18 +127,9 @@ function ShoppingHome() {
                     <p className="text-gray-400 text-sm mt-2">&copy; {new Date().getFullYear()} ShopEase. All Rights Reserved.</p>
                 </div>
             </footer>
-            <div className="fixed bottom-9 right-9">
-                <button 
-                    onClick={() => setChatOpen(!chatOpen)} 
-                    className="w-[80px] h-13 bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center text-2xl">
-                    {chatOpen ? '❌' : '💬'}
-                </button>
-                {chatOpen && (
-                    <div className="font-bold text-lg fixed bottom-20 mb-8 right-9 bg-white w-[400px] h-[550px] rounded-lg shadow-lg overflow-hidden">
-                        <iframe height="430" width="350" src="https://bot.dialogflow.com/26476fad-4fbb-414a-bffb-df1957509a2c"></iframe>
-                    </div>
-                )}
-            </div>
+
+            
+
             <ProductDetailsDialog open={openDetailsDialog} setOpen={setOpenDetailsDialog} productDetails={productDetails} />
             <ToastContainer />
         </div>
